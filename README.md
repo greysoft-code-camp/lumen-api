@@ -11,6 +11,7 @@ composer create-project --prefer-dist laravel/lumen lumen-api
 
 all api endpoints, methods and response
 
-## Register
+### Register
+
 
 
