@@ -19,6 +19,9 @@ class CorsMiddleware
         $headers = [
             'Access-Control-Allow-Origin'      => implode(',', [
                 'http://localhost:8000',
+                'http://localhost:8080',
+                'http://localhost:8081',
+                'http://localhost:8082',
                 'http://127.0.0.1:8080',
             ]),
             'Access-Control-Allow-Methods'     => 'POST, GET, PUT, DELETE',
