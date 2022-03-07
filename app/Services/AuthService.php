@@ -47,16 +47,9 @@ class AuthService{
     public function login($payload)
     {
         try {
-<<<<<<< HEAD
-            $user = User::where('username', $payload->username)->firstOrFail();
-            if(Hash::check($payload->password, $user->password)){
-                $user->api_token = Str::random(50);
-                $this->payload->user->save();
-=======
             $user = $this->user->where('username', $payload->username)->firstOrFail();
             if(Hash::check($payload->password, $user->password)){
                 $user->api_key = Str::random(50);
->>>>>>> cfdecdeba57830713fa3f7d63de46b450293ad2e
                 $this->payload->user = $user;
                 $this->payload->status = 200;
 
@@ -93,10 +86,4 @@ class AuthService{
             $this->payload->error = "You are not logged in";
         }
     }
-
-
-
-
-
-
 }
