@@ -9,6 +9,7 @@ use App\User;
 use StdClass;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Str;
 
 
 class AuthService{
@@ -25,7 +26,7 @@ class AuthService{
             $user = $this->user->create([
                 'username' => strtolower($payload->username),
                 'email' => strtolower($payload->email),
-                'api_token' => str_random(50),
+                'api_token' => Str::random(50),
                 'password' => Hash::make($payload->password),
             ]);
 
@@ -45,10 +46,9 @@ class AuthService{
     public function login($payload)
     {
         try {
-            $api_key = str_random(50);
             $user = $this->user->where('username', $payload->username)->firstOrFail();
             if(Hash::check($payload->password, $user->password)){
-                $user->api_key = $api_key;
+                $user->api_key = Str::random(50);
                 $this->payload->user = $user;
                 $this->payload->status = 200;
 
