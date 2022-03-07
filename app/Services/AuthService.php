@@ -2,22 +2,16 @@
 
 namespace App\Services;
 
-
-use Illuminate\Http\Request;
-use Exception;
 use App\Models\User;
-use StdClass;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Str;
-
 
 class AuthService{
 
     public function __construct()
     {
-        $this->payload = new StdClass;
+        $this->payload = new \StdClass;
         $this->user = new User;
     }
 
@@ -36,7 +30,7 @@ class AuthService{
             $this->payload->status = 201;
 
             return $this->payload;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->payload->error = "something went wrong {$e->getMessage()}";
             $this->payload->status = 500;
 
@@ -59,7 +53,7 @@ class AuthService{
             $this->payload->status = 401;
 
             return $this->payload;
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             if($exception instanceof ModelNotFoundException){
                 $this->payload->error = "invalid username or password";
                 $this->payload->status = 401;
@@ -82,7 +76,7 @@ class AuthService{
             $user->save();
             $this->payload->status = 200;
             $this->payload->success = "Logged Out";
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             $this->payload->error = "You are not logged in";
         }
     }
