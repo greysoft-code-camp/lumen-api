@@ -19,10 +19,10 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['name' => 'auth', 'prefix' => 'api'], function () use ($router) {
-    $router->post('/register', ['uses' => 'AuthController@register']);
-    $router->post('/login', ['uses' => 'AuthController@login']);
-    $router->post('/logout', ['uses' => 'AuthController@logout', 'middleware' => 'auth']);
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->post('/register', 'AuthController@register');
+    $router->post('/login', 'AuthController@login');
+    $router->get('/logout', 'AuthController@logout');
 });
 
 $router->get('/artisan/{command}[/{params}]', function ($command, $params = null) {

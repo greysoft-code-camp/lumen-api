@@ -64,14 +64,8 @@ class AuthController extends Controller
     {
         $payload = $this->auth->logout($request);
 
-        if($payload->status === 200){
-            return response()->json([
-                'message' => $payload->success,
-            ], $payload->status);
-        }
-
         return response()->json([
-            'message' => $payload->error,
+            'message' => $payload->message
         ], $payload->status);
     }
 
