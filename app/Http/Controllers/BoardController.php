@@ -44,6 +44,7 @@ class BoardController extends Controller
     }
 
     public function store(Request $request)
+    {
         # code...
     }
 }
