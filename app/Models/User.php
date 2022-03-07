@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -10,8 +10,6 @@ class User extends Model implements Authenticatable
 {
 
     use AuthenticableTrait;
-
-    public $incrementing = false;
 
     protected $fillable = [
         'username','email', 'api_token', 'password',

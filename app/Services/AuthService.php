@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Request;
 use Exception;
 use App\Models\User;
-use StdClass;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AuthService{
 
@@ -45,7 +44,7 @@ class AuthService{
         try {
             $user = $this->user->where('username', $payload->username)->firstOrFail();
             if(Hash::check($payload->password, $user->password)){
-                $user->api_key = Str::random(50);
+                $user->api_token = Str::random(50);
                 $this->payload->user = $user;
                 $this->payload->status = 200;
 
