@@ -23,6 +23,12 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('/register', 'AuthController@register');
     $router->post('/login', 'AuthController@login');
     $router->get('/logout', 'AuthController@logout');
+
+    $router->group(['prefix' => 'boards', 'middleware' => 'auth'], function () use ($router) {
+        $router->get('/', 'BoardController@index');
+        $router->get('/{id}', 'BoardController@index');
+        $router->post('/create', 'BoardController@store');
+    });
 });
 
 $router->get('/artisan/{command}[/{params}]', function ($command, $params = null) {

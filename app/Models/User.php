@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 class User extends Model implements Authenticatable
 {
@@ -44,8 +45,18 @@ class User extends Model implements Authenticatable
     public static function boot()
      {
         parent::boot();
-        static::creating(function($user){
+        static::creating(function($user) {
             $user->id = Str::uuid()->toString();
         });
+    }
+
+    /**
+     * Get all of the boards for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function boards(): HasMany
+    {
+        return $this->hasMany(Board::class);
     }
 }

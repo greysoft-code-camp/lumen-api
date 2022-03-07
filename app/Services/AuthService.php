@@ -45,6 +45,7 @@ class AuthService{
             $user = $this->user->where('username', $payload->username)->firstOrFail();
             if(Hash::check($payload->password, $user->password)){
                 $user->api_token = Str::random(50);
+                $user->save();
                 $this->payload->user = $user;
                 $this->payload->status = 200;
 
