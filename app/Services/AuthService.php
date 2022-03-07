@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
+use Exception;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use StdClass;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AuthService{
 
@@ -72,12 +74,25 @@ class AuthService{
     {
         try {
             $user = $this->user->where('api_token', $payload->api_token)->first();
-            $user->api_token = null;
-            $user->save();
+
+            if(!$user){
+                $this->payload->message = 'user not authorized';
+                $this->payload->status = 401;
+
+                return $this->payload;
+            }
+            $user->update(['api_token' => null]);
+
+            $this->payload->message = 'user logged out';
             $this->payload->status = 200;
-            $this->payload->success = "Logged Out";
-        } catch (\Exception $exception) {
-            $this->payload->error = "You are not logged in";
+
+            return $this->payload;
+
+        } catch (Exception $exception) {
+            $this->payload->message = "something went wrong - {$exception->getMessage()}";
+            $this->payload->status = 500;
+
+            return $this->payload;
         }
     }
 }
