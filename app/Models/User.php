@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
+use Illuminate\Support\Str;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -19,7 +20,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
+<<<<<<< HEAD
+        'username',
+        'email',
+        'api_token',
+        'password',
+=======
         'username', 'email', 'api_token', 'password',
+>>>>>>> cfdecdeba57830713fa3f7d63de46b450293ad2e
     ];
 
     /**
@@ -30,4 +38,35 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'id' => true,
+    ];
+
+    /**
+     * Indicates if the model's ID is auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * The data type of the auto-incrementing ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    public static function boot()
+     {
+        parent::boot();
+        static::creating(function($user){
+            $user->id = Str::uuid()->toString();
+        });
+    }
 }
