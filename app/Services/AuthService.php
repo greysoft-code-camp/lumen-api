@@ -37,6 +37,8 @@ class AuthService{
         } catch (Exception $e) {
             $this->payload->error = "something went wrong {$e->getMessage()}";
             $this->payload->status = 500;
+
+            return $this->payload;
         }
     }
 
@@ -55,6 +57,7 @@ class AuthService{
             $this->payload->error = "invalid credentials";
             $this->payload->status = 401;
 
+            return $this->payload;
         } catch (Exception $exception) {
             if($exception instanceof ModelNotFoundException){
                 $this->payload->error = "invalid credentials";
@@ -73,7 +76,7 @@ class AuthService{
     public function logout($payload)
     {
         try {
-            $user = $this->user->where('api_token', $$payload->api_token)->first();
+            $user = $this->user->where('api_token', $payload->api_token)->first();
         } catch (Exception $exception) {
             //throw $th;
         }
