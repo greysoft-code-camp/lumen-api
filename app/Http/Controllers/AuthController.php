@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-=======
 use Dotenv\Store\File\Reader;
->>>>>>> cfdecdeba57830713fa3f7d63de46b450293ad2e
 use App\Http\Resources\UserCollection;
 use App\Services\AuthService;
 
@@ -23,13 +20,8 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-<<<<<<< HEAD
-        $this->validate($request, [
-            'username' => 'required|string|unique:users|min:3|max:21',
-=======
         $this->validate($request,[
             'username' => 'required|string|unique:users|min:3',
->>>>>>> cfdecdeba57830713fa3f7d63de46b450293ad2e
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6'
         ]);
@@ -49,11 +41,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-<<<<<<< HEAD
-        $this->validate($request, [
-=======
         $this->validate($request,[
->>>>>>> cfdecdeba57830713fa3f7d63de46b450293ad2e
             'username' => 'required|string',
             'password' => 'required|string'
         ]);
@@ -62,11 +50,7 @@ class AuthController extends Controller
 
         if($payload->status === 200){
             return response()->json([
-<<<<<<< HEAD
-                'token' => $payload->user->api_token,
-=======
                 'message' => 'success',
->>>>>>> cfdecdeba57830713fa3f7d63de46b450293ad2e
                 'user' => new UserCollection($payload->user)
             ], $payload->status);
         }
