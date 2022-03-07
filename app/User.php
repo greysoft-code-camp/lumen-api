@@ -12,8 +12,9 @@ class User extends Model implements Authenticatable
     use AuthenticableTrait;
 
     public $incrementing = false;
+
     protected $fillable = [
-        'username','email','api_token', 'password',
+        'username','email', 'api_token', 'password',
     ];
     protected $hidden = [
         'password'
@@ -21,7 +22,8 @@ class User extends Model implements Authenticatable
     public static function boot()
     {
         parent::boot();
-        static::created(function($user){
+
+        static::creating(function($user){
             $user->id = Str::uuid()->toString();
         });
     }
