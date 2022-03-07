@@ -25,7 +25,6 @@ all api endpoints, methods and response
 ```
 Method: POST
 URI: localhost:8000/api/register
-```
 Response:   "user": {
                 "id": "5a1b9d92-9986-49e6-b401-640d933a3ed2",
                 "username": "joshchief1",
@@ -34,6 +33,7 @@ Response:   "user": {
                 "created_at": "2022-03-07T11:18:00.000000Z",
                 "updated_at": "2022-03-07T11:18:00.000000Z"
             }
+```
 
 
 
