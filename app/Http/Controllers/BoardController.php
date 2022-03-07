@@ -29,6 +29,7 @@ class BoardController extends Controller
         elseif ($boards = Auth::user()->boards)
         {
             return response()->json([
+                'message' => 'Success',
                 'boards' => $boards->map(function($board) {
                     return new BoardCollection($board);
                 })

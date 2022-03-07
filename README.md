@@ -1,4 +1,5 @@
 # Lumen API
+
 An API built over Laravel's Lumen to cause great stuff to happen
 
 ## installation
@@ -19,6 +20,10 @@ composer create-project --prefer-dist laravel/lumen lumen-api
 php arisan migrate
 ```
 
+## Access
+
+The API is accessible via [https://lumen-api.greysoft.com.ng/](https://lumen-api.greysoft.com.ng/api)
+
 # Endpoints
 
 all api endpoints, methods and response
@@ -28,13 +33,15 @@ all api endpoints, methods and response
 ```
 Method: POST
 URI: localhost:8000/api/register
-Response:   "user": {
-                "id": "5a1b9d92-9986-49e6-b401-640d933a3ed2",
-                "username": "joshchief1",
-                "email": "joshchief1619@gmail.com",
-                "api_token": "7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR",
-                "created_at": "2022-03-07T11:18:00.000000Z",
-                "updated_at": "2022-03-07T11:18:00.000000Z"
+Response:   {
+                "token": "7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR",
+                "user": {
+                    "id": "5a1b9d92-9986-49e6-b401-640d933a3ed2",
+                    "username": "joshchief1",
+                    "email": "joshchief1619@gmail.com",
+                    "created_at": "2022-03-07T11:18:00.000000Z",
+                    "updated_at": "2022-03-07T11:18:00.000000Z"
+                }
             }
 ```
 
@@ -43,14 +50,16 @@ Response:   "user": {
 ```
 Method: POST
 URI: localhost:8000/api/login
-Response:   "message": "success",
-            "user": {
-                "id": "5a1b9d92-9986-49e6-b401-640d933a3ed2",
-                "username": "joshchief1",
-                "email": "joshchief1619@gmail.com",
-                "api_token": "7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR",
-                "created_at": "2022-03-07T11:18:00.000000Z",
-                "updated_at": "2022-03-07T11:18:00.000000Z"
+Response:   {
+                "message": "success",
+                "token": "7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR",
+                "user": {
+                    "id": "5a1b9d92-9986-49e6-b401-640d933a3ed2",
+                    "username": "joshchief1",
+                    "email": "joshchief1619@gmail.com",
+                    "created_at": "2022-03-07T11:18:00.000000Z",
+                    "updated_at": "2022-03-07T11:18:00.000000Z"
+                }
             }
 ```
 
@@ -64,5 +73,48 @@ Response:   {
             }
 ```
 
-## Access
-The API is accessible via [https://lumen-api.greysoft.com.ng/](https://lumen-api.greysoft.com.ng/)
+### Get all Boards
+
+```
+Method: GET
+URI: localhost:8000/api/boards?api_token=7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR
+Response:   {
+                {
+                    "message": "success",
+                    "boards": {
+                        "id": 1,
+                        "user_id": "5a1b9d92-9986-49e6-b401-640d933a3ed2",
+                        "name": "Make Shift",
+                        "created_at": "2022-03-07T11:18:00.000000Z",
+                        "updated_at": "2022-03-07T11:18:00.000000Z"
+                    }
+                },
+                {
+                    "message": "success",
+                    "boards": {
+                        "id": 2,
+                        "user_id": "5a1b9d92-9986-49e6-b401-640d933a3ed2",
+                        "name": "Build Wells",
+                        "created_at": "2022-03-07T11:18:00.000000Z",
+                        "updated_at": "2022-03-07T11:18:00.000000Z"
+                    }
+                }
+            }
+```
+
+### Get a single Board
+
+```
+Method: GET
+URI: localhost:8000/api/boards/1?api_token=7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR
+Response:   {
+                "message": "success",
+                "boards": {
+                    "id": 1,
+                    "user_id": "5a1b9d92-9986-49e6-b401-640d933a3ed2",
+                    "name": "Make Shift",
+                    "created_at": "2022-03-07T11:18:00.000000Z",
+                    "updated_at": "2022-03-07T11:18:00.000000Z"
+                }
+            }
+```
