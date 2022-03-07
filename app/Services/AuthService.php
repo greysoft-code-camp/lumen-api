@@ -5,7 +5,7 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use Exception;
-use App\User;
+use App\Models\User;
 use StdClass;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
