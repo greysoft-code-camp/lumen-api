@@ -17,8 +17,8 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'api'], function () use ($router) {
+$router->group(['name' => 'auth', 'prefix' => 'api'], function () use ($router) {
     $router->post('/register', ['uses' => 'AuthController@register']);
     $router->post('/login', ['uses' => 'AuthController@login']);
-    $router->post('/logout', ['uses' => 'AuthController@logout']);
+    $router->post('/logout', ['uses' => 'AuthController@logout', 'middleware' => 'auth']);
 });

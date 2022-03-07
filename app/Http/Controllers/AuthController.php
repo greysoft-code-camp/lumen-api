@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Laravel\Lumen\Http\Request;
-use Dotenv\Store\File\Reader;
+use Illuminate\Http\Request;
 use App\Http\Resources\UserCollection;
 use App\Services\AuthService;
 
@@ -20,7 +19,7 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'username' => 'required|string|unique:users|min:3|max:21',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6'
@@ -30,6 +29,7 @@ class AuthController extends Controller
 
         if($payload->status === 201){
             return response()->json([
+                'token' => $payload->user->api_token,
                 'user' => new UserCollection($payload->user)
             ], $payload->status);
         }
@@ -40,7 +40,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'username' => 'required|string',
             'password' => 'required|min:6'
         ]);
@@ -49,6 +49,7 @@ class AuthController extends Controller
 
         if($payload->status === 200){
             return response()->json([
+                'token' => $payload->user->api_token,
                 'user' => new UserCollection($payload->user)
             ], $payload->status);
         }
@@ -59,7 +60,17 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        $payload = $this->auth->logout($request);
 
+        if($payload->status === 200){
+            return response()->json([
+                'message' => $payload->success,
+            ], $payload->status);
+        }
+
+        return response()->json([
+            'message' => $payload->error,
+        ], $payload->status);
     }
 
 }
