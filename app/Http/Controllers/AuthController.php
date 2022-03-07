@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Laravel\Lumen\Http\Request;
+use Illuminate\Http\Request;
 use Dotenv\Store\File\Reader;
 use App\Http\Resources\UserCollection;
 use App\Services\AuthService;
@@ -20,8 +20,8 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
-            'username' => 'required|string|unique:users|min:3|max:21',
+        $this->validate($request,[
+            'username' => 'required|string|unique:users|min:3',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6'
         ]);
@@ -40,15 +40,16 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
+        $this->validate($request,[
             'username' => 'required|string',
-            'password' => 'required|min:6'
+            'password' => 'required|string'
         ]);
 
         $payload = $this->auth->login($request);
 
         if($payload->status === 200){
             return response()->json([
+                'message' => 'success',
                 'user' => new UserCollection($payload->user)
             ], $payload->status);
         }
