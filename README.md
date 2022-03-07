@@ -8,7 +8,9 @@ composer create-project --prefer-dist laravel/lumen lumen-api
 ```
 
 > Open up the `bootstrap/app.php` and uncomment this line, // app->withEloquent
+
 > Open up the `bootstrap/app.php` and uncomment this line, // //$app->withFacades();
+
 > Don't forget to set your database credentials in the `.env` file
 
 ### Run migrations
