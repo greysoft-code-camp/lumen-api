@@ -51,6 +51,7 @@ class AuthController extends Controller
         if($payload->status === 200){
             return response()->json([
                 'message' => 'success',
+                'token' => $payload->user->api_token,
                 'user' => new UserCollection($payload->user)
             ], $payload->status);
         }
