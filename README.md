@@ -33,6 +33,11 @@ all api endpoints, methods and response
 ```
 Method: POST
 URI: localhost:8000/api/register
+Body:   {
+            "username": "joshchief1",
+            "email": "joshchief1619@gmail.com",
+            "password":"password"
+        }
 Response:   {
                 "token": "7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR",
                 "user": {
@@ -50,6 +55,10 @@ Response:   {
 ```
 Method: POST
 URI: localhost:8000/api/login
+Body:   {
+            "email": "joshchief1619@gmail.com",
+            "password":"password"
+        }
 Response:   {
                 "message": "success",
                 "token": "7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR",
