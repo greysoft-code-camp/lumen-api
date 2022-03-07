@@ -64,5 +64,5 @@ Response:   {
             }
 ```
 
-
-
+## Access
+The API is accessible via [https://lumen-api.greysoft.com.ng/](https://lumen-api.greysoft.com.ng/)

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -21,4 +23,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('/register', 'AuthController@register');
     $router->post('/login', 'AuthController@login');
     $router->get('/logout', 'AuthController@logout');
+});
+
+$router->get('/artisan/{command}[/{params}]', function ($command, $params = null) {
+    Artisan::call($command, $params ? explode(',', $params) : []);
 });

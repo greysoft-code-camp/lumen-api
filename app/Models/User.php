@@ -19,10 +19,33 @@ class User extends Model implements Authenticatable
     protected $hidden = [
         'password'
     ];
-    public static function boot()
-    {
-        parent::boot();
 
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'id' => true,
+    ];
+
+    /**
+     * Indicates if the model's ID is auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * The data type of the auto-incrementing ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    public static function boot()
+     {
+        parent::boot();
         static::creating(function($user){
             $user->id = Str::uuid()->toString();
         });
