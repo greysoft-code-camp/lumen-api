@@ -10,6 +10,7 @@ use StdClass;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 
 class AuthService{
@@ -77,8 +78,24 @@ class AuthService{
     {
         try {
             $user = $this->user->where('api_token', $payload->api_token)->first();
+            if(!$user){
+                $this->payload->message = 'user not authorized';
+                $this->payload->status = 401;
+
+                return $this->payload;
+            }
+            $user->update(['api_token' => null]);
+
+            $this->payload->message = 'user logged out';
+            $this->payload->status = 200;
+
+            return $this->payload;
+
         } catch (Exception $exception) {
-            //throw $th;
+            $this->payload->message = "something went wrong - {$exception->getMessage()}";
+            $this->payload->status = 500;
+
+            return $this->payload;
         }
     }
 

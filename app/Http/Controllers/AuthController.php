@@ -60,7 +60,11 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        $payload = $this->auth->logout($request);
 
+        return response()->json([
+            'message' => $payload->message
+        ], $payload->status);
     }
 
 }
