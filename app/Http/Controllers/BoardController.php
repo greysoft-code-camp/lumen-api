@@ -38,13 +38,24 @@ class BoardController extends Controller
         else
         {
             return response()->json([
-                'message' => 'No baords available'
+                'message' => 'No boards available'
             ], 204);
         }
     }
 
     public function store(Request $request)
     {
-        # code...
+        $this->validate($request, [
+            'name' => 'required|string'
+        ]);
+
+        $board = Auth::user()->boards()->create([
+            'name' => $request->name
+        ]);
+
+        return response()->json([
+            'message' => 'success',
+            'board' => new BoardCollection($board)
+        ], 201);
     }
 }
