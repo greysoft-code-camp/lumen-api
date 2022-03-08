@@ -29,6 +29,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('/{id}', 'BoardController@index');
         $router->post('/create', 'BoardController@store');
     });
+
+    $router->group(['prefix' => 'tasks', 'middleware' => 'auth'], function () use ($router){
+        $router->get('/', 'TaskController@index');
+        $router->post('create/{board}', 'TaskController@store');
+    });
 });
 
 $router->get('/artisan/{command}[/{params}]', function ($command, $params = null) {
