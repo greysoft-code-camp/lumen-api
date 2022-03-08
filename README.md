@@ -127,3 +127,20 @@ Response:   {
                 }
             }
 ```
+
+### Create Board
+
+```
+Method: POST
+URI: localhost:8000/api/boards/create
+Response:   {
+                "message": "success",
+                "board": {
+                    "id": 1,
+                    "name": "personal",
+                    "user_id": "bfebd953-e453-43a7-a302-01c51187addf",
+                    "created_at": "2022-03-08T03:56:00.000000Z",
+                    "updated_at": "2022-03-08T03:56:00.000000Z"
+                }
+            }
+```
