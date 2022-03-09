@@ -34,7 +34,6 @@ class TaskController extends Controller
         ]);
 
         $board = Board::where('id', $request->board)->first();
-        
 
         $task = $board->tasks()->create([
             'name' => $request->name
