@@ -32,6 +32,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->group(['prefix' => 'lists', 'middleware' => 'auth'], function () use ($router) {
         $router->post('/create/{board}', 'BoardController@storeList');
+        $router->get('/{board}', 'BoardController@getList');
     });
 
     $router->group(['prefix' => 'tasks', 'middleware' => 'auth'], function () use ($router){
