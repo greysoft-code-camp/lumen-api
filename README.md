@@ -145,6 +145,19 @@ Response:   {
             }
 ```
 
+### Create List
+
+```
+Method: POST
+URI: localhost:8000/api/lists/create/{board}?api_token=nXc9xHU78QzMj2nFDLj4fPon3RFq3yYr4TjcvKnPe2Q6g2MkWz
+Response:   "message": "list created",
+            "list": [
+                "break",
+                "puke",
+                "cord"
+            ]
+```
+
 ### Create Task
 
 ```
