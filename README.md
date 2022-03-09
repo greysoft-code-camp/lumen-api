@@ -127,3 +127,35 @@ Response:   {
                 }
             }
 ```
+
+### Create Board
+
+```
+Method: POST
+URI: localhost:8000/api/boards/create
+Response:   {
+                "message": "success",
+                "board": {
+                    "id": 1,
+                    "name": "personal",
+                    "user_id": "bfebd953-e453-43a7-a302-01c51187addf",
+                    "created_at": "2022-03-08T03:56:00.000000Z",
+                    "updated_at": "2022-03-08T03:56:00.000000Z"
+                }
+            }
+```
+
+### Create Task
+
+```
+Method: POST
+URI: localhost:8000/api/tasks/create/1?api_token=7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR
+Response:   "message": "success",
+            "task": {
+                "id": 1,
+                "name": "build lumen",
+                "board_id": 1,
+                "created_at": "2022-03-08T15:25:21.000000Z",
+                "updated_at": "2022-03-08T15:25:21.000000Z"
+            }
+```

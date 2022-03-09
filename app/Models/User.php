@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 class User extends Model implements Authenticatable
 {
 
@@ -58,5 +59,17 @@ class User extends Model implements Authenticatable
     public function boards(): HasMany
     {
         return $this->hasMany(Board::class);
+    }
+
+    public function tasks() : HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Task::class,
+            Board::class,
+            'user_id',
+            'board_id',
+            'id',
+            'id'
+        );
     }
 }

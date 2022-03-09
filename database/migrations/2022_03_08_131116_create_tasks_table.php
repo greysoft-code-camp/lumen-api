@@ -3,9 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\User;
+use App\Models\Board;
 
-class CreateBoardsTable extends Migration
+class CreateTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,13 @@ class CreateBoardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('boards', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)
-                    ->references('id')->on('users')
+            $table->string('name');
+            $table->foreignIdFor(Board::class)
+                    ->references('id')->on('boards')
                     ->onDelete('cascade')->onUpdate('cascade');
-            $table->string('name')->nullable();
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateBoardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('boards');
+        Schema::dropIfExists('tasks');
     }
 }
