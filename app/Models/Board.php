@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Board extends Model
 {
+    protected $casts = [
+        'lists' => 'array'
+    ];
+
     protected $fillable = [
-        'user_id','name',
+        'user_id','name', 'lists',
     ];
 
     /**

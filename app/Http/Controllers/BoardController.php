@@ -58,4 +58,30 @@ class BoardController extends Controller
             'board' => new BoardCollection($board)
         ], 201);
     }
+
+    public function storeList(Request $request, $board)
+    {
+        $this->validate($request, [
+            'lists' => 'required|array|min:1'
+        ]);
+
+        $board = Board::where('id', $request->board)->first();
+
+        if(count($board->lists) > 0) {
+            // dd($board->lists);
+            $lists = array_merge($board->lists, $request->lists);
+            $board->update([
+                'lists' => $lists,
+            ]);
+        } else {
+            $board->update([
+                'lists' => $request->lists,
+            ]);
+        }
+
+        return response()->json([
+            "message" => "list created",
+            "list" => $board->lists,
+        ]);
+    }
 }

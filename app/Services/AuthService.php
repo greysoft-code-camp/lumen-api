@@ -42,7 +42,9 @@ class AuthService{
     public function login($payload)
     {
         try {
-            $user = $this->user->where('username', $payload->username)->firstOrFail();
+            $user = User::whereEmail($payload->email)->firstOrFail();
+            dd($user);
+
             if(Hash::check($payload->password, $user->password)){
                 $user->api_token = Str::random(50);
                 $user->save();
@@ -51,13 +53,13 @@ class AuthService{
 
                 return $this->payload;
             }
-            $this->payload->error = "invalid username or password";
+            $this->payload->error = "invalid email or password";
             $this->payload->status = 401;
 
             return $this->payload;
         } catch (\Exception $exception) {
             if($exception instanceof ModelNotFoundException){
-                $this->payload->error = "invalid username or password";
+                $this->payload->error = "user does not exist";
                 $this->payload->status = 401;
 
                 return $this->payload;
