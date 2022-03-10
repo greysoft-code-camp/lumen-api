@@ -69,7 +69,7 @@ class BoardController extends Controller
         try {
             $board = Board::whereId($request->board)->firstOrFail();
             
-            if(count($board->lists) > 0) {
+            if(count($board->lists??[]) > 0 ) {
                 $lists = array_merge($board->lists, $request->lists);
                 $board->update(['lists' => $lists]);
                 return response()->json([
