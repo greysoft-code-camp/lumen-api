@@ -155,8 +155,9 @@ Response:   "message": "list created",
                 "break",
                 "puke",
                 "cord"
+```
 
-### Create List
+### Get List
 
 ```
 Method: GET
