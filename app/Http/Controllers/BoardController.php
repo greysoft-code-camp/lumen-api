@@ -108,7 +108,7 @@ class BoardController extends Controller
             }
             return response()->json([
                     "message" => "success",
-                    "lists" => "create liss"
+                    "lists" => "create list"
                 ], 200);          
 
         } catch (\Exception $exception) {

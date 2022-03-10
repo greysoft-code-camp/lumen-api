@@ -43,7 +43,6 @@ class AuthService{
     {
         try {
             $user = User::whereEmail($payload->email)->firstOrFail();
-            dd($user);
 
             if(Hash::check($payload->password, $user->password)){
                 $user->api_token = Str::random(50);

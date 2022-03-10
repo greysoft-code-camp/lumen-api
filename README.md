@@ -155,6 +155,17 @@ Response:   "message": "list created",
                 "break",
                 "puke",
                 "cord"
+
+### Create List
+
+```
+Method: GET
+URI: localhost:8000/api/lists/{board}?api_token=nXc9xHU78QzMj2nFDLj4fPon3RFq3yYr4TjcvKnPe2Q6g2MkWz
+Response:   "message": "list created",
+            "list": [
+                "break",
+                "puke",
+                "cord"
             ]
 ```
 
