@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 //Run O!
 class Board extends Model
@@ -27,8 +28,20 @@ class Board extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function tasks(): HasMany
+    public function lists(): HasMany
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Lists::class);
+    }
+
+    public function tasks(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Task::class,
+            Lists::class,
+            'board_id',
+            'lists_id',
+            'id',
+            'id',
+        );
     }
 }

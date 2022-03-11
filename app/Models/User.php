@@ -61,16 +61,4 @@ class User extends Model implements Authenticatable
     {
         return $this->hasMany(Board::class);
     }
-
-    public function tasks() : HasManyThrough
-    {
-        return $this->hasManyThrough(
-            Task::class,
-            Board::class,
-            'user_id',
-            'board_id',
-            'id',
-            'id'
-        );
-    }
 }

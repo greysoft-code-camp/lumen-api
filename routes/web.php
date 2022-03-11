@@ -26,18 +26,23 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->group(['prefix' => 'boards', 'middleware' => 'auth'], function () use ($router) {
         $router->get('/', 'BoardController@index');
-        $router->get('/{id}', 'BoardController@index');
         $router->post('/create', 'BoardController@store');
+        $router->put('/{board}/update', 'BoardController@update');
+        $router->delete('/{board}/delete', 'BoardController@destroy');
     });
 
     $router->group(['prefix' => 'lists', 'middleware' => 'auth'], function () use ($router) {
-        $router->post('/create/{board}', 'BoardController@storeList');
-        $router->get('/{board}', 'BoardController@getList');
+        $router->get('/{board}', 'ListController@index');
+        $router->post('/create/{board}', 'ListController@store');
+        $router->put('/{lists}/update', 'ListController@update');
+        $router->delete('/{lists}/delete', 'ListController@destroy');
     });
 
     $router->group(['prefix' => 'tasks', 'middleware' => 'auth'], function () use ($router){
-        $router->get('/', 'TaskController@index');
-        $router->post('create/{board}', 'TaskController@store');
+        $router->get('/{lists}', 'TaskController@index');
+        $router->post('create/{lists}', 'TaskController@store');
+        $router->patch('/{task}/update', 'TaskController@update');
+        $router->delete('{task}/delete', 'TaskController@destroy');
     });
 });
 

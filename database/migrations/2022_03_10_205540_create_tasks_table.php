@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Board;
+use App\Models\Lists;
 
 class CreateTasksTable extends Migration
 {
@@ -17,10 +17,9 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(Board::class)
-                    ->references('id')->on('boards')
+            $table->foreignIdFor(Lists::class)
+                    ->references('id')->on('lists')
                     ->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

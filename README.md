@@ -133,6 +133,10 @@ Response:   {
 ```
 Method: POST
 URI: localhost:8000/api/boards/create
+
+###Form-data   ###Properties
+name            string
+
 Response:   {
                 "message": "success",
                 "board": {
@@ -183,6 +187,10 @@ Response:   "message": "success",
 ```
 Method: PUT
 URI: localhost:8000/api/lists/{lists}/update?api_token=nXc9xHU78QzMj2nFDLj4fPon3RFq3yYr4TjcvKnPe2Q6g2MkWz
+
+###Form-data   ###Properties
+list            string
+
 Response:   {
                 "message": "list updated",
                 "List": {
@@ -209,7 +217,11 @@ Response:   {
 
 ```
 Method: POST
-URI: localhost:8000/api/tasks/create/1?api_token=7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR
+URI: localhost:8000/api/tasks/create/1?api_token=
+
+###Form-data   ###Properties
+name            string
+
 Response:   "message": "success",
             "task": {
                 "id": 3,
@@ -247,6 +259,10 @@ Response:   "message": "success",
 ```
 Method: GET
 URI: localhost:8000/api/tasks/4/update?api_token=7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR
+
+###Form-data   ###Properties
+name            string
+
 Response:   "message": "task updated",
             "task": {
                 "id": 4,
@@ -261,6 +277,7 @@ Response:   "message": "task updated",
 
 ```
 Method: GET
+
 URI: localhost:8000/api/tasks/4/delete?api_token=7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR
 Response:   {
                 "message": "success"

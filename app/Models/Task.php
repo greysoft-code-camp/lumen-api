@@ -11,8 +11,8 @@ class Task extends Model
         'name', 'board_id', 'status'
     ];
 
-    public function board() :BelongsTo
+    public function list(): BelongsTo
     {
-        return $this->belongsTo(Board::class);
+        return $this->belongsTo(Lists::class, 'lists_id');
     }
 }

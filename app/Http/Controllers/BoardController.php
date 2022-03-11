@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Board;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
 
 class BoardController extends Controller
 {
@@ -60,63 +61,41 @@ class BoardController extends Controller
         ], 201);
     }
 
-    public function storeList(Request $request, $board)
+    public function update(Request $request, $board)
     {
         $this->validate($request, [
-            "lists" => "required|array|min:1"
+            "name" => "required|string"
         ]);
 
         try {
-            $board = Board::whereId($request->board)->firstOrFail();
-            
-            if(count($board->lists??[]) > 0 ) {
-                $lists = array_merge($board->lists, $request->lists);
-                $board->update(['lists' => $lists]);
-                return response()->json([
-                    "message" => "list created",
-                    "list" => $board->lists,
-                ]);
-            } else {
-                $board->update(['lists' => $request->lists]);
-                return response()->json([
-                    "message" => "list created",
-                    "list" => $board->lists,
-                ]);
-            }
-        } catch (\Exception $exception) {
+
+            $b = Board::whereId($board)->firstOrFail();
+
+            $b->update(["name" => $request->name]);
+    
+            return response()->json([
+                "message" => "success",
+                "board" => new BoardCollection($board) 
+            ], 200);
+
+        } catch (Exception $exception) {
             if($exception instanceof ModelNotFoundException){
                 return response()->json([
-                    "message" => "board does not exist"
+                    "message" => "board not found"
                 ], 404);
             }
+            return response()->json([
+                "message" => "something went wrong - {$exception->getMessage()}"
+            ], 500);
         }
-
 
     }
 
-    public function getList(Request $request, $board)
+    public function destroy(Request $request, Board $board)
     {
-        try{
-
-            $board = Board::whereId($request->board)->firstOrFail();
-
-            if($board->lists != null){
-                return response()->json([
-                    "message" => "success",
-                    "lists" => $board->lists
-                ], 200); 
-            }
-            return response()->json([
-                    "message" => "success",
-                    "lists" => "Add list"
-                ], 200);          
-
-        } catch (\Exception $exception) {
-            if($exception instanceof ModelNotFoundException){
-                return response()->json([
-                    "message" => "board does not exist"
-                ], 404);
-            }
-        }
+        $board->delete();
+        return response()->json([
+            "message" => "success"
+        ], 200);
     }
 }

@@ -17,7 +17,7 @@ class TaskCollection extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'board_id' => $this->board_id,
+            'list_id' => $this->lists_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
