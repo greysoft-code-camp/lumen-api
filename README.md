@@ -150,6 +150,10 @@ Response:   {
 ```
 Method: POST
 URI: localhost:8000/api/lists/create/{board}?api_token=nXc9xHU78QzMj2nFDLj4fPon3RFq3yYr4TjcvKnPe2Q6g2MkWz
+
+###Form-data   ###Properties
+list            string
+
 Response:   "message": "list created",
             "list": [
                 "break",
@@ -162,12 +166,43 @@ Response:   "message": "list created",
 ```
 Method: GET
 URI: localhost:8000/api/lists/{board}?api_token=nXc9xHU78QzMj2nFDLj4fPon3RFq3yYr4TjcvKnPe2Q6g2MkWz
-Response:   "message": "list created",
-            "list": [
-                "break",
-                "puke",
-                "cord"
+Response:   "message": "success",
+            "lists": [
+                {
+                    "id": 3,
+                    "list": "blown",
+                    "board_id": 2,
+                    "created_at": "2022-03-10T22:46:46.000000Z",
+                    "updated_at": "2022-03-10T22:46:46.000000Z"
+                }
             ]
+```
+
+### Update List
+
+```
+Method: PUT
+URI: localhost:8000/api/lists/{lists}/update?api_token=nXc9xHU78QzMj2nFDLj4fPon3RFq3yYr4TjcvKnPe2Q6g2MkWz
+Response:   {
+                "message": "list updated",
+                "List": {
+                    "id": 4,
+                    "list": "unpacking",
+                    "board_id": 2,
+                    "created_at": "2022-03-10T22:56:41.000000Z",
+                    "updated_at": "2022-03-10T23:18:27.000000Z"
+                }
+            }
+```
+
+### Delete List
+
+```
+Method: DELETE
+URI: localhost:8000/api/lists/{lists}/delete?api_token=nXc9xHU78QzMj2nFDLj4fPon3RFq3yYr4TjcvKnPe2Q6g2MkWz
+Response:   {
+                "message": "{list->name} removed"
+            }
 ```
 
 ### Create Task
@@ -177,10 +212,57 @@ Method: POST
 URI: localhost:8000/api/tasks/create/1?api_token=7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR
 Response:   "message": "success",
             "task": {
-                "id": 1,
+                "id": 3,
                 "name": "build lumen",
-                "board_id": 1,
-                "created_at": "2022-03-08T15:25:21.000000Z",
-                "updated_at": "2022-03-08T15:25:21.000000Z"
+                "list_id": 3,
+                "created_at": "2022-03-11T00:08:47.000000Z",
+                "updated_at": "2022-03-11T00:08:47.000000Z"
+            }
+```
+
+### Get Task
+
+```
+Method: GET
+URI: localhost:8000/api/tasks/4?api_token=7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR
+Response:   "message": "success",
+            "task": {
+                "id": 3,
+                "name": "build lumen",
+                "list_id": 3,
+                "created_at": "2022-03-11T00:08:47.000000Z",
+                "updated_at": "2022-03-11T00:08:47.000000Z"
+            },
+            {
+                "id": 4,
+                "name": "build lumen",
+                "list_id": 3,
+                "created_at": "2022-03-11T01:32:49.000000Z",
+                "updated_at": "2022-03-11T01:32:49.000000Z"
+            }
+```
+
+### Update Task
+
+```
+Method: GET
+URI: localhost:8000/api/tasks/4/update?api_token=7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR
+Response:   "message": "task updated",
+            "task": {
+                "id": 4,
+                "name": "lumen-api",
+                "list_id": 3,
+                "created_at": "2022-03-11T01:32:49.000000Z",
+                "updated_at": "2022-03-11T01:35:48.000000Z"
+            }
+```
+
+### Delete Task
+
+```
+Method: GET
+URI: localhost:8000/api/tasks/4/delete?api_token=7FZKMN2e4OxywtSqvbT3AjyaBUocgSw345jYDIsttoTvrEChxR
+Response:   {
+                "message": "success"
             }
 ```
