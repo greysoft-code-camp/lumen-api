@@ -29,7 +29,7 @@ class ListController extends Controller
                 ], 404);
             }
             return response()->json([
-                "message" => "something went wrong"
+                "message" => "something went wrong".$exception->getMessage();
             ], 500);
         }
     }
