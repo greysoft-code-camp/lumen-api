@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Lists;
+use App\Models\Board;
 use App\Http\Resources\TaskCollection;
 use Illuminate\Support\Facades\Auth;
 use Exception;
@@ -13,17 +14,27 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TaskController extends Controller
 {
-    public function index($lists)
+    public function index($board)
     {
-        $tasks = Task::whereId($lists)->first();
-        if($tasks){
+        try {
+            $b = Board::whereId($board)->firstOrFail();
+            $tasks = $b->tasks;
+
             return response()->json([
                 "message" => "success",
-                "tasks" => new TaskCollection($tasks)
+                "tasks" => $tasks
             ], 200);
-        } else {
+
+        } catch (Exception $exception) {
+            if($exception instanceof ModelNotFoundException){
+                 return response()->json([
+                    "message" => "no board",
+                    "tasks" => $tasks
+                ], 200);
+            }
             return response()->json([
-                "message" => "no tasks",
+                "message" => "something went wrong",
+                "error" => "{$exception->getMessage()}"
             ], 200);
         }
     }

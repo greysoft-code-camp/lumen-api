@@ -39,7 +39,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     });
 
     $router->group(['prefix' => 'tasks', 'middleware' => 'auth'], function () use ($router){
-        $router->get('/{lists}', 'TaskController@index');
+        $router->get('/{board}', 'TaskController@index');
         $router->post('create/{lists}', 'TaskController@store');
         $router->patch('/{task}/update', 'TaskController@update');
         $router->delete('{task}/delete', 'TaskController@destroy');
