@@ -85,7 +85,8 @@ class BoardController extends Controller
                 ], 404);
             }
             return response()->json([
-                "message" => "something went wrong - {$exception->getMessage()}"
+                "message" => "something went wrong",
+                "error" => "{$exception->getMessage()}"
             ], 500);
         }
 

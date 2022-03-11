@@ -29,7 +29,8 @@ class ListController extends Controller
                 ], 404);
             }
             return response()->json([
-                "message" => "something went wrong"
+                "message" => "something went wrong",
+                "error" => "{$exception->getMessage()}"
             ], 500);
         }
     }
@@ -59,7 +60,8 @@ class ListController extends Controller
                 ], 404);
             }
             return response()->json([
-                "message" => "something went wrong"
+                "message" => "something went wrong",
+                "error" => "{$exception->getMessage()}"
             ], 500);
         } 
     }
@@ -90,7 +92,8 @@ class ListController extends Controller
                 ], 404);
             }
             return response()->json([
-                "message" => "something went wrong"
+                "message" => "something went wrong",
+                "error" => "{$exception->getMessage()}"
             ], 500);
         }
     }
